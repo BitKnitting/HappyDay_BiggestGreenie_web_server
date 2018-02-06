@@ -10,6 +10,15 @@ of [The Biggest Greenie](https://bitknitting.github.io/).
     from current energy readings that were captured into the Energy DB
     by [the Energy Monitor Firmware](https://bitknitting.github.io/open_source.html).
 
+* **Templates Folder**
+
+    This is where the Biggest Greenie's web client HTML is stored.
+
+    **layout.html**
+
+    Template file providing the common HTML used across pages.  For
+    example, the HTML for the menu/navigation.
+
 
 ## Code Example
 

@@ -31,7 +31,13 @@ import GetXaxis as gx
 import testRoutines as test
 import logging
 import dateutil.parser
-
+# **********************************************************
+# Logging many events to a logfile.  This way, I can get an idea
+# of when/what code has been executed.
+# There is no output to the console when logging is on.  This makes
+# it difficult to detect if Flask has started up unless the logfile
+# is opened/viewed at the same time.
+# **********************************************************
 logging.basicConfig(filename='BiggestGreenie.log', level=logging.DEBUG)
 
 app = Flask(__name__)
@@ -39,11 +45,13 @@ app = Flask(__name__)
 # To HTML and/or AJAX.  This makes it very powerful for including
 # databases, sensor devices, ... things python is great with and
 # HTML/CSS/Javascript/plotly/Ajax...stuff that is great for the client.
-# ************************************************************
-# Show the page that plots the energy readings.
-# ************************************************************
+# **********************************************************
 
 
+# **********************************************************
+# The Biggest Greenie web client has requested to see the "main"
+# (index) page.
+# **********************************************************
 @app.route('/')
 def home():
     return render_template('index.html')
