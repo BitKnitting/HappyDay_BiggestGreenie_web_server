@@ -4,8 +4,8 @@ This repository contains the files used to build the web server side
 of [The Biggest Greenie](https://bitknitting.github.io/).
 * **BiggestGreenie.py**
 
-...Uses the Flask framework to connect the web client with the Energy DB
-...and the other pages of The Biggest Greenie experience.
+ Uses the Flask framework to connect the web client with the Energy DB
+ and the other pages of The Biggest Greenie experience.
 
 ## Code Example
 
