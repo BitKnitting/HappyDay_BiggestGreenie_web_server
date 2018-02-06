@@ -8,8 +8,8 @@ of [The Biggest Greenie](https://bitknitting.github.io/).
     code is currently set up in test mode, using test data stored
     earlier within the Energy DB.  Eventually, the data will be taken
     from current energy readings that were captured into the Energy DB
-    by [the Energy Monitor Firmware] (https://bitknitting.github.io/open_source.html).
-    
+    by [the Energy Monitor Firmware](https://bitknitting.github.io/open_source.html).
+
 
 ## Code Example
 
