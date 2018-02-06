@@ -19,6 +19,14 @@ of [The Biggest Greenie](https://bitknitting.github.io/).
     Template file providing the common HTML used across pages.  For
     example, the HTML for the menu/navigation.
 
+    **index.html**
+
+    The Biggest Greenie's landing page.
+
+    **energy_plot.html**
+
+    HTML / Slick (widget) / JQuery / Ajax / Plotly code to plot daily/weekly/monthly/yearly energy readings.
+
 
 ## Code Example
 

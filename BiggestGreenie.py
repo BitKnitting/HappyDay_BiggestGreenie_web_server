@@ -50,16 +50,16 @@ app = Flask(__name__)
 
 # **********************************************************
 # The Biggest Greenie web client has requested to see the "main"
-# (index) page.
+# (templates/index) page.
 # **********************************************************
 @app.route('/')
 def home():
     return render_template('index.html')
 
 
-@app.route('/readings')
+@app.route('/plot')
 def readings():
-    return render_template('energyReadings.html')
+    return render_template('energy_plot.html')
 # get the y values for the energy reading plot
 
 
