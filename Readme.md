@@ -27,6 +27,15 @@ of [The Biggest Greenie](https://bitknitting.github.io/).
 
     HTML / Slick (widget) / JQuery / Ajax / Plotly code to plot daily/weekly/monthly/yearly energy readings.
 
+* **static/css Folder**
+
+    This is where the Biggest Greenie's web client CSS is stored.
+
+    **labelpicker.css**
+
+    Used in energy_plot.html to provide clean navigation when choosing
+    between Day / Week / Month / Year.
+
 
 ## Code Example
 

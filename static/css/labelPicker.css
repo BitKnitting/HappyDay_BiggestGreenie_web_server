@@ -1,0 +1,63 @@
+/*******************************************************
+ * The energy reading page uses the labelPicker to show the
+ * day, month, week, year menu items.  I got this from
+ * the Sense web page that displays when I look at my energy
+ * readings monitored by the Sense hardware.
+ ********************************************************/
+
+/* The radio buttons are not shown.  Rather the input is used to change the color of the line drawn under
+   the menu item.
+*/
+
+.label-picker__input {
+  display: none;
+}
+
+.label-picker__label:hover {
+  cursor:pointer;
+}
+.label-picker__label:after {
+  background: #d8d8d8;
+  /* pseudo-thingies need the content property....in this case the content is empty */
+  content: "";
+  display: block;
+  /* height is the line width */
+  height: 4px;
+  margin: 0 auto;
+  -webkit-transform: scaleX(0);
+  -ms-transform: scaleX(0);
+  transform: scaleX(0);
+  width: 100%;
+  transition: all 100ms ease-out;
+}
+
+.label-picker__label:focus {
+  outline: none;
+}
+
+.label-picker__label:hover:after {
+  cursor:pointer;
+  -webkit-transform: scaleX(1);
+  -ms-transform: scaleX(1);
+  transform: scaleX(1);
+  transition: -webkit-transform 150ms ease-out-in;
+  transition: transform 150ms ease-out-in;
+}
+
+.label-picker__label:active:after {
+  /* background: #707070;
+  transition: background 75ms ease-out; */
+}
+
+input[type="radio"]:checked+.label-picker__label {
+  color: #353535;
+}
+
+input[type="radio"]:checked+.label-picker__label:after {
+  /* Seahawk Green for the selected line color */
+  background: #4ea701;
+  transition: background 150ms linear;
+  -webkit-transform: scaleX(1);
+  -ms-transform: scaleX(1);
+  transform: scaleX(1);
+}
