@@ -56,6 +56,8 @@ of [The Biggest Greenie](https://bitknitting.github.io/).
 
 ## Contributors
 
+HappyDay
+
 ## License
 
 Copyright (c) 2018 HappyDay
@@ -77,7 +79,3 @@ Copyright (c) 2018 HappyDay
  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
-
-
-
-A short snippet describing the license (MIT, Apache, etc.)
