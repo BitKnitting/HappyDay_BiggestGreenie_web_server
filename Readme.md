@@ -36,6 +36,20 @@ of [The Biggest Greenie](https://bitknitting.github.io/).
     Used in energy_plot.html to provide clean navigation when choosing
     between Day / Week / Month / Year.
 
+* **EnergyReadingModel.py**       
+
+    This file creates the Energ y database - EnergyMonitor.db -
+    using the peewee object model.
+
+* **EnergyMonitor.db**
+
+    Database with contents used for testing.  The readings were generated using an [ATM90e26 Featherwing from WhatNick](https://bitknitting.wordpress.com/2017/10/07/trying-out-the-atm90e26-featherwing/).
+
+* **x_axis.json**
+
+     Dictionary in json format containing entries for "DAY","WEEK","MONTH".  This makes it easy to set
+     the x-axis labels when plotting the energy readings.
+
 
 ## Code Example
 
