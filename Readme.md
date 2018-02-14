@@ -92,7 +92,7 @@ of [The Biggest Greenie](https://happyday.pagekite.me).
 
 * **EnergyReadingModel.py**       
 
-    This file creates the Energ y database - EnergyMonitor.db -
+    This file creates the Energy database - EnergyMonitor.db -
     using the peewee object model.
 
 * **EnergyMonitor.db**
