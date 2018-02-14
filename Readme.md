@@ -79,6 +79,8 @@ of [The Biggest Greenie](https://happyday.pagekite.me).
 
     HTML / Slick (widget) / JQuery / Ajax / Plotly code to plot daily/weekly/monthly/yearly energy readings.
 
+    ...and there are more html pages.
+
 * **static/css Folder**
 
     This is where the Biggest Greenie's web client CSS is stored.
