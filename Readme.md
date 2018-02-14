@@ -9,6 +9,7 @@ of [The Biggest Greenie](https://bitknitting.github.io/).
     earlier within the Energy DB.  Eventually, the data will be taken
     from current energy readings that were captured into the Energy DB
     by [the Energy Monitor Firmware](https://bitknitting.github.io/open_source.html).
+
     **Port Forwarding Challenge**
     A challenge we faced was allowing access to the web server, which is behind our firewall.
     For the prototype, we chose to use pagekite after reading [this Hackaday](https://hackaday.com/2016/09/21/how-to-run-a-pagekite-server-to-expose-your-raspberry-pi/) article.
