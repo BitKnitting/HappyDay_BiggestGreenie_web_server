@@ -39,15 +39,38 @@ of [The Biggest Greenie](https://happyday.pagekite.me).
      [open_source.html](https://github.com/BitKnitting/HappyDay_BiggestGreenie_web_server/blob/master/templates/open_source.html) exists within the Templates folder.
 
     **layout.html**
-
+    We were introduced to how the layout.html file is used through a YouTube video ["Python Flask from Scratch..."](https://www.youtube.com/watch?v=zRwy8gtgJ1A&feature=youtu.be&t=695)
     [layout.html](https://github.com/BitKnitting/HappyDay_BiggestGreenie_web_server/blob/master/templates/layout.html) sets navigation to the pages.  For example:
     ```
     <li class="nav-item ">
       <a class="nav-link active mx-1" id="open_source" href="open_source">Open Source</a>
     </li>
    ```
-   has an href of open_source.  This is the route set within BiggestGreenie.py.
-   
+   has an href of open_source.  This corresponds to the route set within BiggestGreenie.py.
+   We use Bootstrap 4 to help with web page design.  There's a few changes we made to the
+   default:
+   ```
+   <style>
+    .nav-link {
+      background-color: #29ABE2 !important;
+    }
+    .nav-link:hover {
+      background-color: #28a745 !important;
+    }
+  </style>
+  ```
+  So the navbar has a nice light blue color.  When the mouse hovers over one of the navbar
+  items, the background turns green.  The background color of the navbar item that is
+  clicked is turned green and the text is yellow..as shown in this example for the about page:
+  ```
+  <style>
+  #about {
+    background-color: #28a745 !important;
+    color: yellow;
+  }
+</style>
+```
+
     **index.html**
 
     The Biggest Greenie's landing page.
