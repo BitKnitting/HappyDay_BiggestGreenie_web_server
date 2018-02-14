@@ -68,8 +68,8 @@ of [The Biggest Greenie](https://happyday.pagekite.me).
     background-color: #28a745 !important;
     color: yellow;
   }
-</style>
-```
+  </style>
+  ```
 
     **index.html**
 
