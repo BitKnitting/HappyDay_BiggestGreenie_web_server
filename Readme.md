@@ -9,10 +9,13 @@ of [The Biggest Greenie](https://bitknitting.github.io/).
     earlier within the Energy DB.  Eventually, the data will be taken
     from current energy readings that were captured into the Energy DB
     by [the Energy Monitor Firmware](https://bitknitting.github.io/open_source.html).
+    **Port Forwarding Challenge**
+    A challenge we faced was allowing access to the web server, which is behind our firewall.
+    For the prototype, we chose to use pagekite after reading [this Hackaday](https://hackaday.com/2016/09/21/how-to-run-a-pagekite-server-to-expose-your-raspberry-pi/) article.
 
 * **systemd files Folder**
 
-    We use systemd on the Raspberry Pi to auto start the Flask and Pagekite services.
+    We use systemd on the Raspberry Pi to auto start the Flask (biggestgreenie_flask.service) and Pagekite (biggestgreenie_pagekite.service) services.
     Being self-taught on systemd for this project, we found the following helpful:
 
     - [Documentation](https://www.youtube.com/watch?v=AtEqbYTLHfs)
