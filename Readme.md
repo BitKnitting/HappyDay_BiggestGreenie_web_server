@@ -32,11 +32,11 @@ of [The Biggest Greenie](https://happyday.pagekite.me).
     Flask when routing to determine what page to load.  For example, the
     [BiggestGreenie.py](https://github.com/BitKnitting/HappyDay_BiggestGreenie_web_server/blob/master/BiggestGreenie.py) file has code such as:
 
-    '''
+'''
     @app.route('/open_source')
     def open_source():
       return render_template('open_source.html')
-    '''  
+'''  
 
     This is where the Biggest Greenie's web client HTML is stored.
 
