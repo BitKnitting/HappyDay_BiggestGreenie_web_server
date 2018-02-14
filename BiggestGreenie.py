@@ -56,9 +56,32 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
+@app.route('/open_source')
+def open_source():
+    return render_template('open_source.html')
+
+@app.route('/game')
+def game():
+    return render_template('game.html')
+
+@app.route('/readings')
+def readings():
+    return render_template("readings.html")
+
+@app.route('/about')
+def about():
+    return render_template("about.html")
+
+@app.route('/activities')
+def activities():
+    return render_template("activities.html")
+
+@app.route('/contact')
+def contact():
+    return render_template("contact.html")
 
 @app.route('/plot')
-def readings():
+def plot():
     return render_template('energy_plot.html')
 # get the y values for the energy reading plot
 
@@ -108,7 +131,9 @@ def getData():
 # This is very handy!
 # host = 0.0.0.0 when on Raspberry Pi
 # app.run(debug=True, host='0.0.0.0')
+# Trying to access from outside house
+app.run(debug=True,host='0.0.0.0',port=5000)
 # host = localhost when running on mac
 
 
-app.run(debug=True, host='localhost', port=9999)
+# app.run(debug=True, host='localhost', port=9999)

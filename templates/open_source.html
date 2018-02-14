@@ -1,0 +1,85 @@
+{% extends "layout.html" %} {% block body %}
+<style>
+
+  #open_source {
+    background-color: #28a745 !important ;
+    color: yellow;
+  }
+</style>
+<section>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12" style: "background:green">
+        <h3 class="text-center">Open Source Hardware and Software</h3>
+        <p>All the software and hardware design files and thoughts are available here. Please contact us if you wish to contribute.</p>
+        <button type="button" class="btn play-button btn-lg btn-success d-block mx-auto">Contact</button>
+      </div>
+    </div>
+    <div class="row pt-5 ">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Energy Monitor Hardware</h5>
+            <p>Status: debugging board</p>
+            <p>Next step: Finalize board</p>
+            <a href="https://github.com/BitKnitting/HappyDay_ATM90e26_Kicad" class="badge badge-success">Kicad Files</a>
+            <a class="d-block" href="https://bitknitting.wordpress.com/2017/11/24/the-power-section-of-the-happyday-energy-monitor-pcb/">Sacrificial draft blog post</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Energy Monitor Firmware</h5>
+            <p>Status: Feather Huzzah + Arduino tests.</p>
+            <p>Next step: Circuit Python + LoRa tests.</p>
+            <a href="https://github.com/BitKnitting/HappyDay_ATM90e26_Arduino" class="badge badge-success">Arduino code</a>
+            <a class="d-block" href="https://bitknitting.wordpress.com/2017/10/07/trying-out-the-atm90e26-featherwing/">ATM90e26 Featherwing blog post</a>
+            <a class="d-block" href="https://bitknitting.wordpress.com/2017/10/21/challenge-getting-readings-of-0-from-the-atm90e26/">Challenge Getting Readings blog post</a>
+            <a class="d-block" href="https://bitknitting.wordpress.com/2017/10/24/challenge-monitoring-three-wire-single-phased-system/">Challenge Monitoring Energy blog post</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row pt-5 ">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Kicad BoM Creation Tool</h5>
+            <p>Status: In Use.</p>
+            <p>Next Step: Iterate as find issues/areas for improvement.</p>
+            <a href="https://github.com/BitKnitting/MakeDigikeyBOM_Python3" class="badge badge-success">BoM Creation Code</a>
+            <a class="d-block" href="https://bitknitting.wordpress.com/2018/01/07/simplifying-the-schematic-design-to-part-ordering-workflow-using-octoparts-bom-tool/">Schematic to BoM blog post</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Web Client</h5>
+            <p>Status: In design</p>
+            <p>Next Step: Close on design and GitHub</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row pt-5 ">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Web Server</h5>
+            <p>Status: Testing EnergyDB and Flask Web Service</p>
+            <p>Next Step: Documenting/GitHub current effort</p>
+            <a href="https://github.com/BitKnitting/HappyDay_BiggestGreenie_web_server" class="badge badge-success">Web Server Code</a>
+            <a class="d-block" href="https://bitknitting.wordpress.com/2017/10/17/happyday-neighbors-web-service-side-lets-give-raspberry-pi-a-twirl/">Let's Give Raspberry Pi a Twirl blog post</a>
+            <a class="d-block" href="https://bitknitting.wordpress.com/2018/01/08/using-ajax-to-get-to-energy-readings-stored-on-raspberry-pi/">Using Ajax blog post</a>
+            <a href="https://thepihut.com/blogs/raspberry-pi-tutorials/16683276-how-to-setup-a-static-ip-address-on-your-raspberry-pi">Setting up static IP on Raspberry Pi</a>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+<footer>
+  <p>&copy; 2018 HappyDay.</p>
+</footer>
+{% endblock %}

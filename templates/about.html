@@ -1,0 +1,41 @@
+{% extends "layout.html" %} {% block body %}
+<style>
+  #about {
+    background-color: #28a745 !important;
+    color: yellow;
+  }
+</style>
+
+<section>
+  <div class="container-fluid mt-4">
+    <div class="row">
+      <div class="col-2">
+        <img class="img-fluid" src="static/img/HappyDay_about.jpg" alt="Biggest Greenie About picture">
+      </div>
+      <div class="col">
+        <h5>Together we will get to 100% renewable energy</h5>
+        <p>The Biggest Greenie is a social game with the goal of home owners understanding and decreasing their home's electricity use. Understanding and conserving is a major step towards 100% renewable energy.
+        </p>
+        <p>
+          The game idea came from our own experience and desire to engage our community. The first thing we did was figure out how much energy our house is using. Then we used an Energy Monitor to figure out what appliances were gobbling up energy. Next, we changed
+          how we used energy with little to no effect to our lifestyle - while at the same time moving to using an electric car.
+        </p>
+        <p>We're excited to share the results:</p>
+        <img class="img-fluid" src="static/img/Jan2017_vs_Jan2018_energy_use.png" alt="Jan 2017 to Jan 2018 Energy Use">
+        <p class="lead">In January 2017, we used 1151 KWh of Energy. In January 2018 we used 631 KWh. This is a -45% change. That's including our switch to an electric car.
+        </p>
+        <p>Wow! What if all of us were wasting around 45% of our energy use on things like second refrigerators we didn't even know we had plugged in? At least we'll know why our energy use surges during summer months when we run a bunch of pumps to power
+          our jacuzzi....
+        </p>
+        <p>This is our attempt to get involved in a community that sees the need to move off of fossil fuels and pragmatically get to 100% renewable energy.</p>
+        <p>Step 1 - knowledge and conservation.</p>
+        <p>Please contact us if you want to get involved.</p>
+        <button type="button" class="btn play-button btn-lg btn-success d-block mx-auto">Contact</button>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <p>&copy; 2018 HappyDay.</p>
+</footer>
+{% endblock %}

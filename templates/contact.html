@@ -1,0 +1,32 @@
+{% extends "layout.html" %} {% block body %}
+<style>
+  #contact {
+    background-color: #28a745 !important;
+    color: yellow;
+  }
+</style>
+<section>
+  <div class="container">
+    <p class="lead">We are excited to improve from your feedback or answer any questions.</p>
+    <form>
+      <fieldset class="form-group">
+        <label for="InputName">Name</label>
+        <input type="email" class="form-control" id="InputName" placeholder="Enter name">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="InputEmail">Email address</label>
+        <input type="email" class="form-control" id="InputEmail" placeholder="Enter email">
+        <small class="text-muted">We'll never share your email with anyone else.</small>
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="TextArea">Thoughts</label>
+        <textarea class="form-control" id="TextArea" rows="5"></textarea>
+      </fieldset>
+      <button type="submit" class="d-block mx-auto btn play-button btn-lg btn-success">Submit</button>
+    </form>
+  </div>
+</section>
+<footer>
+  <p>&copy; 2018 HappyDay.</p>
+</footer>
+{% endblock %}
