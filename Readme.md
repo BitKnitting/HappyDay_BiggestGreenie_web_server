@@ -36,13 +36,18 @@ of [The Biggest Greenie](https://happyday.pagekite.me).
     def open_source():
       return render_template('open_source.html')
     ```  
-    This is where the Biggest Greenie's web client HTML is stored.
+     [open_source.html](https://github.com/BitKnitting/HappyDay_BiggestGreenie_web_server/blob/master/templates/open_source.html) exists within the Templates folder.
 
     **layout.html**
 
-    Template file providing the common HTML used across pages.  For
-    example, the HTML for the menu/navigation.
-
+    [layout.html](https://github.com/BitKnitting/HappyDay_BiggestGreenie_web_server/blob/master/templates/layout.html) sets navigation to the pages.  For example:
+    ```
+    <li class="nav-item ">
+      <a class="nav-link active mx-1" id="open_source" href="open_source">Open Source</a>
+    </li>
+   ```
+   has an href of open_source.  This is the route set within BiggestGreenie.py.
+   
     **index.html**
 
     The Biggest Greenie's landing page.
