@@ -1,0 +1,19 @@
+
+[Unit]
+Description=The Biggest FLASK Greenie Service
+# Don't start the service until the network is up and running
+After=network.target
+
+[Service]
+Type=simple
+# wasn't finding some of the python libraries
+Environment=PYTHONPATH=/home/pi/.local/lib/python3.5/site-packages
+# start up Python app that uses Flask to backend service the web site.
+ExecStart=/usr/bin/python3 /home/pi/web_server/BiggestGreenie.py
+# BiggestGreenie.py should always be available/running
+Restart=on-failure
+User=pi
+
+[Install]
+# Components of this application should be started at boot time
+WantedBy=multi-user.target
