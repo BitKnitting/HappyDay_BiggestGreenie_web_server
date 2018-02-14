@@ -15,7 +15,11 @@ of [The Biggest Greenie](https://bitknitting.github.io/).
     We use systemd on the Raspberry Pi to auto start the Flask and Pagekite services.
     Being self-taught on systemd for this project, we found the following helpful:
 
-    - Quick HOW-TO on using systemd on a Raspberry Pi:   https://www.raspberrypi-spy.co.uk/2015/10/how-to-autorun-a-python-script-on-boot-using-systemd/   
+    - [Documentation](https://www.youtube.com/watch?v=AtEqbYTLHfs)
+
+    - [Quick HOW-TO](https://www.raspberrypi-spy.co.uk/2015/10/how-to-autorun-a-python-script-on-boot-using-systemd/)   
+
+    - [YouTube Tutorial](https://www.youtube.com/watch?v=AtEqbYTLHfs)
 
 * **Templates Folder**
 
