@@ -88,11 +88,6 @@ def contact():
     return render_template("contact.html")
 
 
-@app.route('/carousel_test')
-def carousel():
-    return render_template("carousel_test.html")
-
-
 @app.route('/getData', methods=['POST'])
 def getData():
     plot_date = request.get_json()
