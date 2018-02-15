@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Slick Carousel test</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/labelPicker.css') }}">
+  <style>
+
+    .slick-prev:before {
+      color: green;
+    }
+    .slick-next:before {
+      color: green;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container pt-5 mx-auto">
+    <!--  The user chooses what amount of time to view energy readings - day, week...
+                  When the page is loaded or refreshed, Today's readings are displayed   -->
+    <!-- name= on radio button groups the radio buttons together -->
+    <div class="row">
+      <div class="col ">
+        <span><input type="radio" class="label-picker__input" id="DAY" name="label-picker" value="on" >
+               <label  label-large  class="label-picker__label" for="DAY">DAY</label></span>
+      </div>
+      <div class="col ">
+        <span><input type="radio" class="label-picker__input" id="WEEK" name="label-picker" value="on" >
+               <label  class="label-picker__label" for="WEEK">WEEK</label></span>
+      </div>
+      <div class="col ">
+        <span><input type="radio" class="label-picker__input" id="MONTH" name="label-picker" value="on">
+               <label  class="label-picker__label" for="MONTH">MONTH</label></span>
+      </div>
+      <div class="col ">
+        <span><input type="radio" class="label-picker__input" id="YEAR" name="label-picker" value="on">
+               <label   class="label-picker__label" for="YEAR">YEAR</label></span>
+      </div>
+    </div>
+  </div>
+  <!--  ************************************************************************* -->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2 mx-auto pt-2">
+        <div class="slider-wrap">
+          <div class="slider text-center">
+            <div class="slide">
+              <h5 id="0" class="align-text-bottom mb-1"></h5>
+              <!-- <h1>Today</h1> -->
+            </div>
+            <div class="slide center">
+              <h5 id="1" class="align-text-bottom mb-1"></h5>
+              <!-- <h1>Tomorrow</h1> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+  <script type="text/javascript">
+    // Knowing which slide is being displayed and which date unit gives us the
+    // info we need to know what energy readings to plot.
+    var dateState = {
+      dateLoc: 0, // positive number goes to previous dates...
+      dateUnit: 'DAY'
+    };
+    var dateToPlot;
+    // Start with showing readings for today.
+    $(window).on('load', function() {
+      $('.slider').slick({
+        dots: false,
+        autoplay: false,
+        arrows: true,
+        prevArrow: '<button type="button" class="slick-prev"></button>',
+        nextArrow: '<button type="button" class="slick-next"></button>',
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        initialSlide: 0
+      });
+      // When window loads we don't display the next arrow since that would mean a future date.
+      $('.slick-next').css('display', 'none')
+
+      $('.slick-prev').click(function() {
+        dateState.dateLoc += 1;
+        $('.slick-next').css('display', 'block');
+        dateToPlot = updateSlider();
+      });
+      // The next button does not appear when dateLoc = 0, so check is for 0.
+      $('.slick-next').click(function() {
+        dateState.dateLoc -= 1;
+        if (dateState.dateLoc == 0) {
+          $('.slick-next').css('display', 'none')
+          dateToPlot = updateSlider();
+        }
+      });
+      $('#DAY').click();
+    });
+
+    // The user has clicked on either DAY, WEEK, MONTH, Year.
+    // Update the dateUnit to capture what the user clicked on,
+    // Then update the plot with readings for the current day, week....
+    $('.label-picker__input').click(function() {
+      dateState.dateUnit = this.id;
+      dateState.dateLoc = 0;
+      moment.fn.toJSON = function() { return this.format(); }
+      dateStr = JSON.stringify({postDate : moment()});
+      $('.slick-next').css('display', 'none')
+      updateSlider();
+    });
+
+// updateSlider updates the contents of the slide to reflect the date the user
+// has selected based on scrolling with the next/previous buttons.
+    function updateSlider() {
+      var date = moment();
+      if (dateState.dateLoc == 0) {
+        switch (dateState.dateUnit) {
+          case 'DAY':
+            $('.slick-current').html('Today');
+            break;
+          case 'WEEK':
+            $('.slick-current').html('This Week');
+            break;
+          case 'MONTH':
+            $('.slick-current').html('This Month');
+            break;
+          case 'YEAR':
+            $('.slick-current').html('This Year');
+            break;
+          default:
+        }
+      } else {
+        switch (dateState.dateUnit) {
+          case 'DAY':
+            date = date.subtract(dateState.dateLoc, 'days').format('MMM, D YYYY ')
+            break;
+          case 'WEEK':
+            date = date.subtract(dateState.dateLoc, 'weeks').format('MMM, D YYYY ')
+            break;
+          case 'MONTH':
+
+            break;
+          case 'YEAR':
+
+            break;
+          default:
+            break;
+        }
+        $('.slick-current').html(date)
+      }
+      return date;
+    }
+  </script>
+</body>
+
+</html>

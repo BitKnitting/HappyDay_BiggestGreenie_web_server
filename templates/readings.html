@@ -1,13 +1,240 @@
 {% extends "layout.html" %} {% block body %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
 <style>
-
   #readings {
-    background-color: #28a745 !important ;
+    background-color: #28a745 !important;
     color: yellow;
+  }
+
+  .slick-prev:before {
+    color: green;
+  }
+
+  .slick-next:before {
+    color: green;
   }
 </style>
 <section>
-  <h1>coming soon...</h1>
+  <div class="container pt-5 mx-auto">
+    <!--  The user chooses what amount of time to view energy readings - day, week...
+                  When the page is loaded or refreshed, Today's readings are displayed   -->
+    <!-- name= on radio button groups the radio buttons together -->
+    <div class="row">
+      <div class="col ">
+        <span><input type="radio" class="label-picker__input" id="DAY" name="label-picker" value="on" >
+               <label  label-large  class="label-picker__label" for="DAY">DAY</label></span>
+      </div>
+      <div class="col ">
+        <span><input type="radio" class="label-picker__input" id="WEEK" name="label-picker" value="on" >
+               <label  class="label-picker__label" for="WEEK">WEEK</label></span>
+      </div>
+      <div class="col ">
+        <span><input type="radio" class="label-picker__input" id="MONTH" name="label-picker" value="on">
+               <label  class="label-picker__label" for="MONTH">MONTH</label></span>
+      </div>
+      <div class="col ">
+        <span><input type="radio" class="label-picker__input" id="YEAR" name="label-picker" value="on">
+               <label   class="label-picker__label" for="YEAR">YEAR</label></span>
+      </div>
+    </div>
+  </div>
+  <!--  ************************************************************************* -->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2 mx-auto pt-2">
+        <div class="slider-wrap">
+          <div class="slider text-center">
+            <div class="slide">
+              <h5 id="0" class="align-text-bottom mb-1"></h5>
+              <!-- <h1>Today</h1> -->
+            </div>
+            <div class="slide center">
+              <h5 id="1" class="align-text-bottom mb-1"></h5>
+              <!-- <h1>Tomorrow</h1> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  ************************************************************************* -->
+  <div class="container">
+    <div id="plotlyDiv">
+      <!-- Plotly chart will be drawn inside this DIV -->
+    </div>
+  </div>
+  <!--  ************************************************************************* -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script type="text/javascript">
+    // Knowing which slide is being displayed and which date unit gives us the
+    // info we need to know what energy readings to plot.
+    // Knowing which slide is being displayed and which date unit gives us the
+    // info we need to know what energy readings to plot.
+    var dateState = {
+      dateLoc: 0, // positive number goes to previous dates...
+      dateUnit: 'DAY'
+    };
+    var dateToPlot = {
+      dateUnit: 'DAY',
+      date: moment()
+    }
+    // Start with showing readings for today.
+    $(window).on('load', function() {
+      $('.slider').slick({
+        dots: false,
+        autoplay: false,
+        arrows: true,
+        prevArrow: '<button type="button" class="slick-prev"></button>',
+        nextArrow: '<button type="button" class="slick-next"></button>',
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        initialSlide: 0
+      });
+      // When window loads we don't display the next arrow since that would mean a future date.
+      // $('.slick-next').css('display', 'none')
+
+      $('.slick-prev').click(function() {
+        dateState.dateLoc += 1;
+        $('.slick-next').css('display', 'block');
+        updateSliderAndDateToPlot();
+        plot();
+      });
+      // The next button does not appear when dateLoc = 0, so check is for 0.
+      $('.slick-next').click(function() {
+        dateState.dateLoc -= 1;
+        updateSliderAndDateToPlot();
+        plot();
+        // A dateLoc of 0 means we're at the current day/week.....
+        // So we hide the next button because there is no reason to
+        // go to future dates.
+        if (dateState.dateLoc == 0) {
+          $('.slick-next').css('display', 'none')
+        }
+      });
+      $('#DAY').click();
+    });
+
+    // The user has clicked on either DAY, WEEK, MONTH, Year.
+    // Update the dateUnit to capture what the user clicked on,
+    // Then update the plot with readings for the current day, week....
+    $('.label-picker__input').click(function() {
+      dateState.dateUnit = this.id;
+      dateState.dateLoc = 0;
+      moment.fn.toJSON = function() {
+        return this.format();
+      }
+      dateStr = JSON.stringify({
+        postDate: moment()
+      });
+      $('.slick-next').css('display', 'none')
+      updateSliderAndDateToPlot();
+      plot();
+    });
+    // updateSlider updates the contents of the slide to reflect the date the user
+    // has selected based on scrolling with the next/previous buttons.
+    function updateSliderAndDateToPlot() {
+      switch (dateState.dateUnit) {
+        case 'DAY':
+          dateToPlot.dateUnit = 'DAY';
+          dateToPlot.date = moment().subtract(dateState.dateLoc, 'days').format('MMM D, YYYY ')
+          if (dateState.dateLoc == 0) { // At first slide
+            $('.slick-current').html('Today');
+            // The date in dateToPlot.date is the one to use..
+          } else {
+            $('.slick-current').html(dateToPlot.date)
+          }
+          break;
+
+        case 'WEEK':
+          // Get the start of the week - Sunday...
+          // Plotting will then be from the Sunday date through Saturday
+          dateToPlot.date = moment().startOf('week').subtract(dateState.dateLoc, 'weeks')
+          dateToPlot.dateUnit = 'WEEK';
+          if (dateState.dateLoc == 0) {
+            $('.slick-current').html('This Week');
+          } else {
+            $('.slick-current').html(dateToPlot.date.format('MMM, D YYYY'))
+          }
+          break;
+        case 'MONTH':
+          dateToPlot.date = moment().subtract(dateState.dateLoc, 'months')
+          dateToPlot.dateUnit = 'MONTH';
+          if (dateState.dateLoc == 0) {
+            $('.slick-current').html('This Month');
+          } else {
+            $('.slick-current').html(dateToPlot.date.format('MMM, YYYY'))
+          }
+          break;
+        case 'YEAR':
+          dateToPlot.dateUnit = 'YEAR';
+          dateToPlot.date = moment().subtract(dateState.dateLoc, 'years')
+          if (dateState.dateLoc == 0) {
+            $('.slick-current').html('This Year');
+          } else {
+            $('.slick-current').html(dateToPlot.date.format('YYYY'))
+          }
+          break;
+        default:
+      }
+    }
+    // Ask the database on the server for energy readings based on the date unit and date.
+    function plot() {
+      // send the dateToPlot info.
+      // Convert dateToPlot object into a string with JSON.stringify().
+      // BiggestGreenie.py figures out what to do based on dateToPlot.dateUnit
+      const inputVars = JSON.stringify(dateToPlot);
+      // Use ajax / POST to send the dateToPlot input vars to the server Flask route.
+      // URL if on Raspberry Pi:
+      // theURL = "http://raspberrypi:5000/getData"
+      // URL if on Mac:
+      theURL = "http://greenie:5000/getData"
+      var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": theURL,
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+        },
+        "processData": false,
+        "data": inputVars
+      }
+
+      $.ajax(settings).done(function(response) {
+        // TBD: If there is no data, a -1 is returned for response.
+        // That means there is nothing to plot.  The graph area should
+        // have something like the text "no data available"
+          plotReadings(response);
+      });
+
+      function plotReadings(response) {
+        Plotly.purge("plotlyDiv");
+        xyStuff = [{
+          x: response.x,
+          y: response.power,
+          type: "bar",
+          marker: {
+            color: "#4ea701"
+          }
+        }];
+
+        var layout = {
+          xaxis: {
+            tick0: 0,
+            dtick: 3
+          }
+        };
+        Plotly.plot(plotlyDiv, xyStuff, layout);
+
+
+      }
+
+    }
+  </script>
 </section>
 <footer>
   <p>&copy; 2018 HappyDay.</p>

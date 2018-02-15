@@ -1,6 +1,6 @@
 
 import json
-import sys
+import os
 
 
 def get_x_axis(date_unit):
@@ -10,8 +10,7 @@ def get_x_axis(date_unit):
     For example, if the power readings are for a day, the
     x-axis labels are hours of the day.
     '''
-    # TBD: Do a better job with filepaths....this hardcoded stuff
-    # is really not pretty...
-    with open('/Users/margaret/Documents/EnergyMonitoring/HappyDayNeighbors/TheBiggestGreenieV1/x_axis.json') as x_axis_file:
+    cwd = os.getcwd()
+    with open(cwd+'/x_axis.json') as x_axis_file:
         x_axis_labels = json.load(x_axis_file)
         return  x_axis_labels[date_unit]

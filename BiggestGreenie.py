@@ -29,7 +29,7 @@ from flask import Flask, render_template, request, jsonify
 import EnergyPlot as ep
 import GetXaxis as gx
 import testRoutines as test
-import logging
+# import logging
 import dateutil.parser
 # **********************************************************
 # Logging many events to a logfile.  This way, I can get an idea
@@ -38,7 +38,8 @@ import dateutil.parser
 # it difficult to detect if Flask has started up unless the logfile
 # is opened/viewed at the same time.
 # **********************************************************
-logging.basicConfig(filename='BiggestGreenie.log', level=logging.DEBUG)
+# logging.basicConfig(filename='BiggestGreenie.log', level=logging.DEBUG)
+# logging.basicConfig( level=logging.DEBUG)
 
 app = Flask(__name__)
 # Flask is very clever!  Each page the web browser accesses is hooked up
@@ -56,34 +57,40 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
+
 @app.route('/open_source')
 def open_source():
     return render_template('open_source.html')
+
 
 @app.route('/game')
 def game():
     return render_template('game.html')
 
+
 @app.route('/readings')
 def readings():
     return render_template("readings.html")
+
 
 @app.route('/about')
 def about():
     return render_template("about.html")
 
+
 @app.route('/activities')
 def activities():
     return render_template("activities.html")
+
 
 @app.route('/contact')
 def contact():
     return render_template("contact.html")
 
-@app.route('/plot')
-def plot():
-    return render_template('energy_plot.html')
-# get the y values for the energy reading plot
+
+@app.route('/carousel_test')
+def carousel():
+    return render_template("carousel_test.html")
 
 
 @app.route('/getData', methods=['POST'])
@@ -93,21 +100,13 @@ def getData():
         # Using energy readings I generated awhile back until the hw/fw is
         # ready.
         test_day = test.get_random_date('any')
-        logging.info(test.log_line_info() + ' logging for DAY. Day asked: {} ' \
-                        'Test day: {}'.format(plot_date['date'], test_day))
         power_values = ep.get_hour_list(test_day)
     elif (plot_date['dateUnit'] == 'WEEK'):
         test_day = test.get_random_date('Monday')
-        logging.info(test.log_line_info() + ' logging for WEEK. ' \
-        'MONDAY of the week asked for: {} ' \
-        'MONDAY test day: {}'.format(plot_date['date'], test_day))
         power_values = ep.get_week_list(test_day)
-    elif (plot_date['dateUnit']== 'MONTH'):
-        test_month,test_year = test.get_random_date('MONTH')
-        logging.info(test.log_line_info()+ ' logging for MONTH. ' \
-        'month - year asked for: {} '\
-        'month - year test values: {} - {}'.format(plot_date['date'],test_month,test_year))
-        power_values = ep.get_month_list(test_month,test_year)
+    elif (plot_date['dateUnit'] == 'MONTH'):
+        test_month, test_year = test.get_random_date('MONTH')
+        power_values = ep.get_month_list(test_month, test_year)
     else:
         power_values = -1
     if (power_values != -1):
@@ -117,22 +116,21 @@ def getData():
         # out how many x-axis values there are (one for every day of the month).
         if (plot_date['dateUnit'] == 'MONTH'):
             last_day = len(power_values)
-            x_axis_strs = [str(i) for i in range(1,last_day+1)]
+            x_axis_strs = [str(i) for i in range(1, last_day + 1)]
         else:
             # Get X-axis markers
             x_axis_strs = gx.get_x_axis(plot_date['dateUnit'])
     else:
         x_axis_strs = ['0']
-    logging.info('X AXIS: {}'.format(x_axis_strs))
-    logging.info('POWER: {}'.format(power_values))
-    return jsonify({ 'power': power_values, 'x': x_axis_strs  })
+    return jsonify({'power': power_values, 'x': x_axis_strs})
+
 
 # When debug=True, the debug service restarts after changes are made.
 # This is very handy!
 # host = 0.0.0.0 when on Raspberry Pi
 # app.run(debug=True, host='0.0.0.0')
 # Trying to access from outside house
-app.run(debug=True,host='0.0.0.0',port=5000)
+app.run(debug=True, use_debugger=True, host='0.0.0.0', port=5000)
 # host = localhost when running on mac
 
 

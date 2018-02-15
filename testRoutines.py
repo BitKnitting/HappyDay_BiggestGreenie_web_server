@@ -14,11 +14,10 @@ import json
 import os
 import random
 
-filename = '/Users/margaret/Documents/EnergyMonitoring/HappyDayNeighbors/TheBiggestGreenieV1/uniqueDays.json'
-
+cwd = os.getcwd()
+filename = cwd + '/uniqueDays.json'
 
 def create_unique_days_file():
-    import pdb;pdb.set_trace()
     query = Reading.select()
     df = pd.DataFrame(list(query.dicts()))
     uniqueDays = set()
@@ -27,7 +26,6 @@ def create_unique_days_file():
         uniqueDay = d.strftime('%b %-d, %Y')
         uniqueDays.add(uniqueDay)
     listUniqueDays = list(uniqueDays)
-    print(listUniqueDays)
     with open(filename,'w') as uniqueDaysFile:
         json.dump(listUniqueDays,uniqueDaysFile)
 ##################################

@@ -2,11 +2,9 @@ import pandas as pd
 from EnergyReadingModel import Reading
 import datetime
 import testRoutines as stack
-import logging
-import os
+# import logging
 
-os.chdir('/home/pi/web_server')
-logging.basicConfig(filename='BiggestGreenie.log', level=logging.DEBUG)
+# logging.basicConfig(filename='BiggestGreenie.log', level=logging.DEBUG)
 # ######################################################################
 # get_hour_list(day wanting hourly energy readings)
 # This function handles sending back energy readings when the user wants
@@ -30,7 +28,7 @@ def get_hour_list(day):
     try:
         start_day = datetime.datetime.strptime(start_day_str, '%b %d, %Y %H %M %S')
     except ValueError:
-        logging.error(stack.log_line_info() + 'The day passed in - {} - was not valid'.format(start_day))
+        # logging.error(stack.log_line_info() + 'The day passed in - {} - was not valid'.format(start_day))
         return -1
     # Not checking if the end of day is valid since the change was only in hour/min/sec
     end_day_str = day + ' 23 59 59'
@@ -60,10 +58,10 @@ def get_week_list(monday_of_week):
         start_week = datetime.datetime.strptime(start_week_str, '%b %d, %Y %H %M %S')
         # check if the date is a MONDAY.  If it is, .weekday is a Monday.
         if (start_week.weekday() != 0):
-            logging.error(stack.log_line_info() +'The day passed in - {} - is not a Monday'.format(start_week))
+            # logging.error(stack.log_line_info() +'The day passed in - {} - is not a Monday'.format(start_week))
             return -1
     except ValueError:
-        logging.error(stack.log_line_info() +'The Monday passed in - {} - is not a valid date'.format(start_day))
+        # logging.error(stack.log_line_info() +'The Monday passed in - {} - is not a valid date'.format(start_day))
         return -1
     end_week = start_week + datetime.timedelta(days=7)
     return get_rows('WEEK',start_week, end_week)
@@ -81,7 +79,7 @@ def get_month_list(month,year):
     try:
         first_day = datetime.date(year=year,month=month,day=1)
     except ValueError:
-        logging.error(stack.log_line_info() +'Could not create a valid date for month {}, year {}'.format(month,year))
+        # logging.error(stack.log_line_info() +'Could not create a valid date for month {}, year {}'.format(month,year))
         return -1
     # we know the month, year passed in was valid so the last day will be the right format.
     # we just need to figure out what the last day is.
