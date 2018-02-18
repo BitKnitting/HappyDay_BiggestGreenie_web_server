@@ -26,9 +26,8 @@
 # **********************************************************
 import peewee
 # USE full path when running as a service on the Raspberry Pi
-#database = peewee.SqliteDatabase("./home/pi/EnergyDB/EnergyMonitor.db")
 # USE local path when running from the mac
-database = peewee.SqliteDatabase("EnergyMonitor.db")
+database = peewee.SqliteDatabase("/home/pi/web_server/EnergyMonitor.db")
 ###############
 
 class Reading(peewee.Model):

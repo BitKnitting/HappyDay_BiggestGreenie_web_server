@@ -26,10 +26,11 @@
 # THE SOFTWARE.
 # **********************************************************
 from flask import Flask, render_template, request, jsonify
+# from flask_cors import CORS
 import EnergyPlot as ep
 import GetXaxis as gx
 import testRoutines as test
-# import logging
+import logging
 import dateutil.parser
 # **********************************************************
 # Logging many events to a logfile.  This way, I can get an idea
@@ -38,15 +39,12 @@ import dateutil.parser
 # it difficult to detect if Flask has started up unless the logfile
 # is opened/viewed at the same time.
 # **********************************************************
+
 # logging.basicConfig(filename='BiggestGreenie.log', level=logging.DEBUG)
 # logging.basicConfig( level=logging.DEBUG)
 
 app = Flask(__name__)
-# Flask is very clever!  Each page the web browser accesses is hooked up
-# To HTML and/or AJAX.  This makes it very powerful for including
-# databases, sensor devices, ... things python is great with and
-# HTML/CSS/Javascript/plotly/Ajax...stuff that is great for the client.
-# **********************************************************
+
 
 
 # **********************************************************
@@ -70,6 +68,7 @@ def game():
 
 @app.route('/readings')
 def readings():
+    app.logger.debug('-->/readings')
     return render_template("readings.html")
 
 
@@ -90,12 +89,17 @@ def contact():
 
 @app.route('/getData', methods=['POST'])
 def getData():
+    app.logger.debug('--->getData()')
     plot_date = request.get_json()
     if (plot_date['dateUnit'] == 'DAY'):
         # Using energy readings I generated awhile back until the hw/fw is
         # ready.
         test_day = test.get_random_date('any')
-        power_values = ep.get_hour_list(test_day)
+        # app.logger.debug(test.log_line_info() + ' logging for DAY. Day asked: {} ' \
+        #         'Test day: {}'.format(plot_date['date'], test_day))
+        power_values = ep.get_hour_list(app.logger,test_day)
+        # app.logger.debug(test.log_line_info() + ' power_values: {} '.format(power_values))
+
     elif (plot_date['dateUnit'] == 'WEEK'):
         test_day = test.get_random_date('Monday')
         power_values = ep.get_week_list(test_day)
@@ -125,7 +129,7 @@ def getData():
 # host = 0.0.0.0 when on Raspberry Pi
 # app.run(debug=True, host='0.0.0.0')
 # Trying to access from outside house
-app.run(debug=True, use_debugger=True, host='0.0.0.0', port=5000)
+app.run(debug=True, host='0.0.0.0', port=5000)
 # host = localhost when running on mac
 
 

@@ -191,7 +191,8 @@
       // URL if on Raspberry Pi:
       // theURL = "http://raspberrypi:5000/getData"
       // URL if on Mac:
-      theURL = "http://greenie:5000/getData"
+       theURL = "https://happyday.pagekite.me/getData"
+      //theURL = "http://greenie:5000/getData"
       var settings = {
         "async": true,
         "crossDomain": true,
@@ -203,7 +204,7 @@
         "processData": false,
         "data": inputVars
       }
-
+      // Get the data
       $.ajax(settings).done(function(response) {
         // TBD: If there is no data, a -1 is returned for response.
         // That means there is nothing to plot.  The graph area should

@@ -13,9 +13,8 @@ import inspect
 import json
 import os
 import random
+filename = '/home/pi/web_server/uniqueDays.json'
 
-cwd = os.getcwd()
-filename = cwd + '/uniqueDays.json'
 
 def create_unique_days_file():
     query = Reading.select()

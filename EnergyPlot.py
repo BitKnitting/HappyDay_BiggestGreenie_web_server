@@ -2,7 +2,6 @@ import pandas as pd
 from EnergyReadingModel import Reading
 import datetime
 import testRoutines as stack
-# import logging
 
 # logging.basicConfig(filename='BiggestGreenie.log', level=logging.DEBUG)
 # ######################################################################
@@ -15,7 +14,8 @@ import testRoutines as stack
 # ######################################################################
 
 
-def get_hour_list(day):
+def get_hour_list(log,day):
+    log.debug('get_hour_list')
     '''get_hour_list(readings for this day)
     returns 24 hourly readings for a specific day.
     The date format must be MMM D, YYYY.  eg: Jan 21, 2018
@@ -26,14 +26,17 @@ def get_hour_list(day):
     # day is a date string formatted
     start_day_str = day + ' 00 00 00'
     try:
-        start_day = datetime.datetime.strptime(start_day_str, '%b %d, %Y %H %M %S')
+        start_day = datetime.datetime.strptime(
+            start_day_str, '%b %d, %Y %H %M %S')
     except ValueError:
         # logging.error(stack.log_line_info() + 'The day passed in - {} - was not valid'.format(start_day))
         return -1
     # Not checking if the end of day is valid since the change was only in hour/min/sec
     end_day_str = day + ' 23 59 59'
     end_day = datetime.datetime.strptime(end_day_str, '%b %d, %Y %H %M %S')
-    return get_rows('DAY',start_day, end_day)
+    power_values = get_rows('DAY', start_day, end_day)
+    log.debug('power values: {}',power_values)
+    return power_values
     ## ######################################################################
     # get_week_list(Monday of the week the user wants energy readings)
     # The date format must be MMM D, YYYY and a Monday.  eg: Jan 21, 2018
@@ -55,7 +58,8 @@ def get_week_list(monday_of_week):
     # week, and the subsequent 6 days - ie: full week of readings.
     start_week_str = monday_of_week + ' 00 00 00'
     try:
-        start_week = datetime.datetime.strptime(start_week_str, '%b %d, %Y %H %M %S')
+        start_week = datetime.datetime.strptime(
+            start_week_str, '%b %d, %Y %H %M %S')
         # check if the date is a MONDAY.  If it is, .weekday is a Monday.
         if (start_week.weekday() != 0):
             # logging.error(stack.log_line_info() +'The day passed in - {} - is not a Monday'.format(start_week))
@@ -64,10 +68,10 @@ def get_week_list(monday_of_week):
         # logging.error(stack.log_line_info() +'The Monday passed in - {} - is not a valid date'.format(start_day))
         return -1
     end_week = start_week + datetime.timedelta(days=7)
-    return get_rows('WEEK',start_week, end_week)
+    return get_rows('WEEK', start_week, end_week)
 
 
-def get_month_list(month,year):
+def get_month_list(month, year):
     '''get_month_list(Month within the year to get daily energy readings)
     returns a list where the number of elements is equal to or less than
     the number of days in that month.  The first element is the energy reading
@@ -77,18 +81,18 @@ def get_month_list(month,year):
     0 is returned for an element if there are no energy readings for that day.
     '''
     try:
-        first_day = datetime.date(year=year,month=month,day=1)
+        first_day = datetime.date(year=year, month=month, day=1)
     except ValueError:
         # logging.error(stack.log_line_info() +'Could not create a valid date for month {}, year {}'.format(month,year))
         return -1
     # we know the month, year passed in was valid so the last day will be the right format.
     # we just need to figure out what the last day is.
     first_day = datetime.datetime.combine(first_day,
-                          datetime.time(0,0,0))
-    last_day =  last_day_of_month(first_day)
+                                          datetime.time(0, 0, 0))
+    last_day = last_day_of_month(first_day)
     last_day = datetime.datetime.combine(last_day,
-                          datetime.time(23,59,59))
-    return get_rows('MONTH',first_day,last_day)
+                                         datetime.time(23, 59, 59))
+    return get_rows('MONTH', first_day, last_day)
 # ######################################################################
 # get_rows is a utility routine used by the functions responsible for
 # getting a list of energy readings for a date unit (like 24 hours for a
@@ -109,15 +113,16 @@ def get_month_list(month,year):
 # ######################################################################
 
 
-def get_rows(date_unit,start, stop):
+def get_rows(date_unit, start, stop):
     rows_as_peewee = Reading.select(
         Reading.time,
         Reading.p1,
         Reading.p2).where(Reading.time.between(
-        start,
-        stop))
+            start,
+            stop))
     # convert a peewee Select() query into a pandas dataframe.
     df = pd.DataFrame(list(rows_as_peewee.dicts()))
+
     # Our homes have two power lines.  The total power used at a
     # given time is the addition of the two.
     df['power'] = df['p1'] + df['p2']
@@ -157,5 +162,6 @@ def get_rows(date_unit,start, stop):
 
 
 def last_day_of_month(any_day):
-    next_month = any_day.replace(day=28) + datetime.timedelta(days=4)  # this will never fail
+    next_month = any_day.replace(
+        day=28) + datetime.timedelta(days=4)  # this will never fail
     return next_month - datetime.timedelta(days=next_month.day)

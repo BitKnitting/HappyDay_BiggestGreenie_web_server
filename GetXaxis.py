@@ -10,7 +10,6 @@ def get_x_axis(date_unit):
     For example, if the power readings are for a day, the
     x-axis labels are hours of the day.
     '''
-    cwd = os.getcwd()
-    with open(cwd+'/x_axis.json') as x_axis_file:
+    with open('/home/pi/web_server/x_axis.json') as x_axis_file:
         x_axis_labels = json.load(x_axis_file)
         return  x_axis_labels[date_unit]
