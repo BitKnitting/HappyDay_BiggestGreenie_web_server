@@ -1,85 +1,28 @@
 {% extends "layout.html" %} {% block body %}
+<style>
+  hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 1;
+    border-top: 5px solid rgba(0, 0, 0, 0.1);
+  }
+</style>
 <header>
-  <div class="container pt-3">
-    <div class="row">
-      <div class="pl-5 col">
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="3000">
-          <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
-          </ol>
-          <div class="carousel-inner text-center ">
-            <div class="carousel-item mb-5 active">
-              <img class="img-fluid" src="static/img/login-current.png" alt="Biggest Greenie Login">
-              <div class="carousel-caption d-none d-md-block">
-                <h5 class="text-dark">Login</h5>
-                <p class="text-dark">or sign up</p>
-              </div>
-            </div>
-            <div class="carousel-item mb-5">
-              <img src="static/img/breaker_box-current.png" alt="Biggest Greenie Breaker box">
-              <div class="carousel-caption d-none d-md-block">
-                <h5 class="text-dark">We'll install</h5>
-                <p class="text-dark">an Energy Monitor</p>
-              </div>
-            </div>
-            <div class="carousel-item mb-5">
-              <img src="static/img/plot-current.png" alt="Biggest Greenie Plot">
-              <div class="carousel-caption d-none d-md-block">
-                <h5 class="text-dark">You start</h5>
-                <p class="text-dark">monitoring your Energy Use</p>
-              </div>
-            </div>
-            <div class="carousel-item mb-5">
-              <img src="static/img/friends-current.png" alt="Biggest Greenie Neighbors">
-              <div class="carousel-caption d-none d-md-block">
-                <h5 class="text-dark">Neighbors</h5>
-                <p class="text-dark">join in</p>
-              </div>
-            </div>
-            <div class="carousel-item mb-5">
-              <img src="static/img/Leaderboard-current.png" alt="Biggest Greenie Leaderboard">
-              <div class="carousel-caption d-none d-md-block">
-                <h5 class="text-dark">Play and Win</h5>
-                <p class="text-dark">by Using Less Energy</p>
-              </div>
-            </div>
-          </div>
-          <a class="carousel-control-prev" href="#carouselExampleControls" data-slide="prev">
-                    <i class="fas fa-chevron-left fa-lg" style="color:rgb(128,128,128)"></i>
-                </a>
-          <a class="carousel-control-next" href="#carouselExampleControls" data-slide="next">
-                    <i class="fas fa-chevron-right fa-lg" style="color:rgb(128,128,128)"></i>
-                </a>
-        </div>
-      </div>
-    </div>
+  <!--  jumbotron -->
+  <div class="jumbotron">
+    <h1 class="display-4">Play The Biggest Greenie</h1>
+    <img class='img-fluid pt-5' src="static/img/BiggestGreenie_jumbotron.png" alt="Circle arrows describing The Biggest Greenie.">
+    <p class="my-4">
+      <a href="#" class="play-button btn btn-success btn-lg">Get Started</a>
+    </p>
   </div>
-
+  <!--  /jumbotron -->
 </header>
 <main>
-  <div class="row">
-    <div class="col mt-5">
-      <div class="card">
-        <h2 class="card-header text-success">Become The Biggest Greenie</h2>
-        <div class="card-body">
-          <p class="card-text lead">Win the title of <span class="text-success">The Biggest Greenie</span> as you Reduce your Energy Consumption.</p>
-          <div class="form-row text-center">
-            <div class="col-12">
-              <a href="#" class="play-button btn btn-success btn-lg text-center">Get Started</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+
 </main>
 </div>
-<!-- signup form -->
-<hr>
+
 <div class="row py-4 text-muted">
   <div class="ml-4 mr-auto col-md col-xl-5">
     <p><strong>About HappyDay</strong></p>
