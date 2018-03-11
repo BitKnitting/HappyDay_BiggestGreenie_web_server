@@ -24,22 +24,27 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+  <!--  MAJOR PAIN TO RELOAD Javascript files during development... using method from here: -->
+  <!--  https://stackoverflow.com/questions/118884/how-to-force-browser-to-reload-cached-css-js-files -->
+  <!-- Development version: -->
+<script>document.write('<script src="static/js/login_form.js?dev=' + Math.floor(Math.random() * 100) + '"\><\/script>');</script>
+
 </head>
 <!-- Navigation -->
 <!--  see https://teamtreehouse.com/library/responsive-menus -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-vera-blue">
   <a class="navbar-brand ml-2" href="/">
-    <img src="/static/img/Greenie-leaf-logo.svg" width="30" height="30" class="d-inline-block align-middle" alt="">
-        The Biggest Greenie
-      </a>
+  <img src="static/img/Greenie-leaf-logo.svg" width="50" height="50" class="d-inline-block align-middle" alt="">
+      The Biggest Greenie
+    </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <span class="navbar-toggler-icon"></span>
+</button>
 
   <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
     <ul class="nav nav-pills ">
       <li class="nav-item ">
-        <a class="nav-link  active mx-1 " id="game" href="game">Game</a>
+        <a class="nav-link  active mx-1 " id="game" href="game">myGame</a>
       </li>
       <li class="nav-item ">
         <a class="nav-link active mx-1" id="readings" href="readings">Readings</a>
@@ -61,7 +66,6 @@
   </div>
 </nav>
 <!-- /Page Navigation -->
-
 
 {% block body %}{% endblock %}
 

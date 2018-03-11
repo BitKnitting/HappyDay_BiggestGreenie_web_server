@@ -1,12 +1,179 @@
 {% extends "layout.html" %} {% block body %}
+
+
 <style>
+.bg-dull-green {
+  background-color: rgb(21,149,135) ;
+}
   #game {
     background-color: #28a745 !important;
     color: yellow;
   }
+  @media (min-width: 768px) {
+    .modal-xl {
+      width: 100%;
+      min-width: 1500px;
+    }
+  }
+  /* see:
+   - https://stackoverflow.com/questions/10957781/google-maps-autocomplete-result-in-bootstrap-modal-dialog
+   - https://getbootstrap.com/docs/4.0/layout/overview/#z-index
+     */
+  .modal{
+      z-index: 20;
+  }
+  .modal-backdrop{
+      z-index: 10;
+  }​
+  .col,
+  .col-md-4,
+  .col-md-5,
+  .col-md-3,
+  .col-md-6,
+  .md-form,
+  .container {
+    border-radius: 15px 15px 15px 15px;
+  }
+
+  .larger_text {
+    font-size: x-large;
+  }
+
+  .nav-tabs {
+    border-bottom: none;
+  }
+
+  .nav-tabs .nav-link.active {
+    background-color: #e2e2e2;
+    border-top-right-radius: 2rem;
+    border-top-left-radius: 2rem;
+
+  }
+
+  .tab-pane.active {
+    background-color: #e2e2e2;
+  }
+
+  .boarder_curved {
+    border-radius: 15px 15px 15px 15px;
+  }
 </style>
 <h1>coming soon</h1>
+
+<section>
+
+  <!--Modal: Login / Create account Form-->
+  <div class="modal " id="login_dialog_box" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <!--  Navigation Tags-->
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link  active " data-toggle="tab" href="#have_account_panel" role="tab"><i class="fa fa-user mr-1"></i>Have Account</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " data-toggle="tab" href="#create_account_panel" role="tab"><i class="fa fa-user-plus mr-1"></i>Create Account</a>
+          </li>
+        </ul>
+        <!--  /Navigation Tags-->
+        <div class="tab-content">
+          <!--  Have Account Pane -->
+          <div class="tab-pane fade in show active" id="have_account_panel" role="tabpanel">
+            <div class="modal-body">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-5 bg-vera-blue text-white pb-3 mr-5">
+                    <i class="fa fa-envelope prefix"></i><label for="have_account_email">&nbsp;Your email</label>
+                    <input type="email" placeholder="Email" id="have_account_email" class="form-control form-control-sm validate">
+                  </div>
+                  <div class="col-md-5 bg-dull-green text-white pb-3">
+                    <i class="fa fa-lock prefix"></i><label for="have_account_password">&nbsp;Your password</label>
+                    <input type="password" placeholder="Password" id="have_account_password" class="form-control form-control-sm validate">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Footer-->
+            <div class="modal-footer">
+              <div class="options text-center text-md-right mt-1">
+                <p>Forgot <a href="#" class="blue-text">Password?</a></p>
+              </div>
+              <button type="button" class="btn btn-outline-info  mx-auto" data-dismiss="modal">Log In</button>
+            </div>
+          </div>
+          <!--  /Have Account Pane -->
+          <!--  Create Account Pane -->
+          <div class="tab-pane fade" id="create_account_panel" role="tabpanel">
+            <div class="modal-body">
+              <div class="container-fluid">
+                <div class="row">
+                  <!--  email -->
+                  <div class="col-md-5 bg-vera-blue text-white pb-3 mx-5">
+                    <i class="fa fa-envelope prefix"></i><label for="create_account_email">&nbsp;Your email</label>
+                    <input type="email" placeholder="Email" id="create_account_email" class="form-control form-control-sm validate">
+                  </div>
+                  <!--  password -->
+                  <div class="col-md-5 bg-dull-green text-white pb-3 ml-3">
+                    <i class="fa fa-lock prefix"></i><label for="create_account_password">&nbsp;Your password</label>
+                    <input type="password" placeholder="Password" id="create_account_password" class="form-control form-control-sm validate">
+                  </div>
+                </div>
+                <div class="row pt-3">
+                  <!--  display name -->
+                  <div class="col-md-5 bg-dull-green text-white pb-3 mx-5">
+                    <i class="fa fa-user-circle prefix"></i><label for="create_account_displayname">&nbsp;Your disply name</label>
+                    <input type="displayname" placeholder="Display Name" id="create_account_displayname" class="form-control form-control-sm validate">
+                  </div>
+                </div>
+                <div class="row pt-3 mr-5">
+                  <!--  Input Addressaddress -->
+                  <div class="col-md-11  mx-5 bg-dull-green text-white boarder_curved">
+                    <div class="row">
+                      <div class="col-md-5 pb-5">
+                        <i class="fa fa-home prefix"></i><label class='lead' for="create_account_address">&nbsp;Your address</label>
+                        <input id="autocomplete" class='form-control form-control-sm validate'  placeholder="Enter your address" onFocus="geolocate()" type="text"></input>
+                      </div>
+                      <!--  Filled  in address is shown -->
+                      <div class="collapse row mt-5 ml-5" id='address'>
+                        <p id='street'></p>
+                        <p id='city_state'></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Footer-->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-info  mx-auto" data-dismiss="modal">Create Account</button>
+            </div>
+          </div>
+        </div>
+        <!--  /Create Account Pane -->
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+
 <footer>
   <p>&copy; 2018 HappyDay.</p>
 </footer>
+<!--  generated API KEY here: https://developers.google.com/maps/documentation/javascript/get-api-key-->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADK28oqXjXV0Sr9gwLrVGhC_Y21sUrOEk&libraries=places&callback=initAutocomplete" async defer></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#login_dialog_box').modal('show');
+  })
+</script>
 {% endblock %}

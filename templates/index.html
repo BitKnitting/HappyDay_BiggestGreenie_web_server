@@ -1,46 +1,87 @@
 {% extends "layout.html" %} {% block body %}
-<style>
-  hr {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    border: 1;
-    border-top: 5px solid rgba(0, 0, 0, 0.1);
-  }
-</style>
-<header>
-  <!--  jumbotron -->
-  <div class="jumbotron">
-    <h1 class="display-4">Play The Biggest Greenie</h1>
-    <img class='img-fluid pt-5' src="static/img/BiggestGreenie_jumbotron.png" alt="Circle arrows describing The Biggest Greenie.">
-    <p class="my-4">
-      <a href="#" class="play-button btn btn-success btn-lg">Get Started</a>
-    </p>
-  </div>
-  <!--  /jumbotron -->
-</header>
-<main>
 
-</main>
-</div>
-
-<div class="row py-4 text-muted">
-  <div class="ml-4 mr-auto col-md col-xl-5">
-    <p><strong>About HappyDay</strong></p>
-    <p>HappyDay builds Renewable Energy Community Experiences.</p>
+<!--  Get User to click play button -->
+<section>
+  <div class="container  pt-2">
+    <img src="static/img/play-greenie.svg" alt="Play The Biggest Greenie Title">
   </div>
-  <div class="mr-4 col-md col-xl-5 ml-auto">
-    <p><strong>Stay up-to-date on HappyDay Experiences</strong></p>
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="Email">
-      <span class="input-group-btn">
-          <button class="btn btn-success" type="button">Sign up</button>
-        </span>
+  <div class="container">
+    <div class="row no-gutters">
+      <div class="col-md-3 pt-4 order-2 order-md-1">
+        <img class='img-fluid' src="static/img/benefits_inkscape_v2.svg" alt="Benefits">
+      </div>
+      <div class="col-md-6 pt-4 pl-3 order-1 order-md-2">
+        <img class='img-fluid' src="static/img/play_steps.svg" alt="Play steps">
+        <a href="game" class="ml-5 hover-button btn btn-success btn-lg">Get Started</a>
+      </div>
+      <div class="col-md-3 pt-4 order-3 order-md-3">
+        <img class='img-fluid' src="static/img/rewards_inkscape.svg" alt="Rewards">
+      </div>
     </div>
   </div>
-</div>
-<hr>
-<!-- /signup form -->
+</section>
+<!--  /Get User to click play button -->
+<section>
+  <!-- Show user the difference the community of players is making -->
+  <div class="container pt-4">
+    <h2 class='display-4'>Because of YOU...</h2>
+    <div class="row">
+      <div class="col-3">
+        <div class="card pt-4">
+          <img class="card-img-top mx-auto" src="static/img/piggy_bank.png" alt="piggy bank icon">
+          <div class="card-body">
+            <h5 class="card-title">$ Saved</h5>
+            <p class="card-text lead">$3,250.90</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card pt-4">
+          <img class="card-img-top mx-auto " src="static/img/power-plug-green.jpg" alt="Carbon Footprint icon">
+          <div class="card-body">
+            <h5 class="card-title">Electricity Saved</h5>
+            <p class="card-text lead">5,000KWh</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card pt-4">
+          <img class="card-img-top mx-auto" width=10rem src="static/img/Carbon_footprint_icon.png" alt="Carbon Footprint icon">
+          <div class="card-body">
+            <h5 class="card-title">CO<sub>2</sub> Avoided</h5>
+            <p class="card-text lead">1,000,576 lbs</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card pt-4">
+          <img class="card-img-top mx-auto" src="static/img/renewable.png" alt="renewable icon">
+          <div class="card-body">
+            <h5 class="card-title">Trees grown</h5>
+            <p class="card-text lead">3,000</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Show user the difference the community of players is making -->
+</section>
 <footer>
+  <div class="row py-4 text-muted">
+    <div class="ml-4 mr-auto col-md col-xl-5">
+      <p><strong>About HappyDay</strong></p>
+      <p>HappyDay builds Renewable Energy Community Experiences.</p>
+    </div>
+    <div class="mr-4 col-md col-xl-5 ml-auto">
+      <p><strong>Stay up-to-date on HappyDay Experiences</strong></p>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Email">
+        <span class="input-group-btn">
+          <button class="btn btn-success" type="button">Sign up</button>
+        </span>
+      </div>
+    </div>
+  </div>
   <p>&copy; 2018 HappyDay.</p>
 </footer>
 
