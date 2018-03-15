@@ -129,8 +129,8 @@ def getData():
 # host = 0.0.0.0 when on Raspberry Pi
 # app.run(debug=True, host='0.0.0.0')
 # Trying to access from outside house
-app.run(debug=True, host='0.0.0.0', port=5000)
+# app.run(debug=True, host='0.0.0.0', port=5000)
 # host = localhost when running on mac
 
 
-# app.run(debug=True, host='localhost', port=9999)
+app.run(debug=True, host='localhost', port=9999)

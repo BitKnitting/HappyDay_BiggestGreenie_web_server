@@ -1,0 +1,27 @@
+{
+  "name": "biggest_greenie_web_server",
+  "version": "0.0.1",
+  "description": "This repository contains the files used to build the web server side of [The Biggest Greenie](https://happyday.pagekite.me).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BitKnitting/HappyDay_BiggestGreenie_web_server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BitKnitting/HappyDay_BiggestGreenie_web_server/issues"
+  },
+  "homepage": "https://github.com/BitKnitting/HappyDay_BiggestGreenie_web_server#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-debug": "^3.2.0",
+    "gulp-inject": "^4.3.1",
+    "gulp-svgmin": "^1.2.4",
+    "gulp-svgo": "^1.4.0",
+    "gulp-svgstore": "^6.1.1"
+  }
+}
